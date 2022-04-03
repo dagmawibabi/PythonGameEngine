@@ -1,3 +1,5 @@
+from multiprocessing import Event
+from turtle import back, bgcolor
 import pygame
 import tkinter as tk
 from assetImage import *
@@ -5,51 +7,129 @@ from assetImage import *
 # Root Window
 root = tk.Tk()
 root.geometry("900x600")
-root.title("Game Engine")
+root.title("Eunoia Engine")
+root.config(background="black")
+#root.wm_attributes("-transparentcolor", "white")
+
+# Defaults
+gameWindowDefaultIcon = "defaults/icons/E_Logo.png"
+gameWindowDefaultWidth = 800
+gameWindowDefaultHeight = 600
+gameWindowDefaultTitle = "New Game"
+defaultAssetImagePath = "defaults/images/1.png"
+defaultAssetImageWidth = 100
+defaultAssetImageHeight = 100
+defaultAssetImageXPos = 10
+defaultAssetImageYPos = 10
 
 # List Of Assets
 listOfAssets = []
+listOfAssetLabels = []
+
 # Functions
 def runGame():
     # Get Window Properties
     # Get Window Title and Icon Path
     windowIconPath = windowIconE.get()
     windowTitle = windowTitleE.get()
+    if windowTitle == "" or windowTitle == " " or windowTitle:
+        windowTitle = gameWindowDefaultTitle
     # Get Window Width and Height
-    windowWidth = int(windowWidthE.get())
-    windowHeight = int(windowHeightE.get())    
+    try:
+        windowWidth = int(windowWidthE.get())
+    except:
+        windowWidth = gameWindowDefaultWidth
+    try:
+        windowHeight = int(windowHeightE.get())    
+    except:
+        windowHeight = gameWindowDefaultHeight    
 
     # Make Game
     pygame.init()
     # Set Window Properties
-    windowIcon = pygame.image.load(windowIconPath)
-    screen = pygame.display.set_mode((windowWidth, windowHeight))
-    pygame.display.set_caption(windowTitle)
+    try:
+        windowIcon = pygame.image.load(windowIconPath)
+    except:
+        windowIcon = pygame.image.load(gameWindowDefaultIcon)
     pygame.display.set_icon(windowIcon)
-    for i in range(0, len(listOfAssets) - 1):
-        listOfAssets[i].displayImage(screen)
-        print(listOfAssets[i].x)
+    pygame.display.set_caption(windowTitle)
+    screen = pygame.display.set_mode((windowWidth, windowHeight))
+    for curAssets in listOfAssets:
+        curAssets.displayImage(screen)
         pygame.display.update()
 
+# Add Assets
+assetRowNum = 0
+assetColNum = 0
+addRow = False
+
+class newAssetImageLabel():
+    def __init__(self, assetPath):
+        self.varName = "imagePI"+str(len(listOfAssets))
+        self.varName = tk.PhotoImage(file=assetPath)
+        self.varName = self.varName.zoom(5) # I ended up running out of memory with 250
+        self.varName = self.varName.subsample(32)
+
 def addNewAssetImage():
-    print(listOfAssets)
     # Asset Properties
     # Get Asset Path
     assetPath = assetImagePathE.get()
     # Get Asset Width and Height
-    assetWidth = int(assetImageWidthE.get())
-    assetHeight = int(assetImageHeightE.get())
+    try:
+        assetWidth = int(assetImageWidthE.get())
+    except:
+        assetWidth = defaultAssetImageWidth
+    try:
+        assetHeight = int(assetImageHeightE.get())
+    except:
+        assetHeight = defaultAssetImageHeight
     # Get Asset X and Y Postion
-    assetXPos = int(assetImageXPosE.get())
-    assetYPos = int(assetImageYPosE.get())
+    try:
+        assetXPos = int(assetImageXPosE.get())
+    except:
+        assetXPos = defaultAssetImageXPos
+    try:
+        assetYPos = int(assetImageYPosE.get())
+    except:
+        assetYPos = defaultAssetImageYPos
     # Set Asset Properties 
-    asset = pygame.image.load(assetPath)
     asset = AssetImage()
-    asset.loadImage(assetPath)
+    try:
+        asset.loadImage(assetPath)
+    except:
+        asset.loadImage(defaultAssetImagePath)
     asset.setImagePostion(assetXPos, assetYPos)
     asset.scaleImage(assetWidth, assetHeight)
     # Add into Assets List
     listOfAssets.append(asset)
+    newAssetLabel = newAssetImageLabel(assetPath)
+    listOfAssetLabels.append(newAssetLabel)
+    addNewAssetToUI()
+
+def selectImageAsset(event):
+    if event.widget["background"] == "white":
+        event.widget.configure(background="aqua")
+    else:
+        event.widget.configure(background="white")
+
+def addNewAssetToUI():
+    # Add To UI
+    global assetColNum, assetRowNum, addRow
+    for i in listOfAssetLabels:
+        imageL = tk.Label(subFrameAALF, image = i.varName,  borderwidth = 2, relief = "groove", width = 80, height = 80, background="white")
+    imageL.grid(row = assetRowNum, column = assetColNum)
+    imageL.bind("<Button-1>", selectImageAsset)
+
+    # Display In Grid
+    if addRow == False:
+        addRow = True
+        assetColNum += 1
+    else:
+        addRow = False
+        assetRowNum += 1
+        assetColNum = 0
+
+
 
 # UI
 #? Window Properties
@@ -118,12 +198,25 @@ assetImageYPosE.grid(row = 4, column = 1)
 addAssetB = tk.Button(subFrameAIPF, text="Add Asset", command=addNewAssetImage)
 addAssetB.grid(row = 5, column = 0, columnspan = 2)
 
+#? Added Assets
+addedAssetsListsF = tk.Frame(root, highlightbackground="black", highlightthickness=1, padx=20, pady=15)
+addedAssetsListsF.grid(row = 2, column = 0)
+addedAssetsListsL = tk.Label(addedAssetsListsF, text="Added Assets")
+addedAssetsListsL.grid(row = 0, column = 0)
+subFrameAALF = tk.Frame(addedAssetsListsF, highlightbackground="black", highlightthickness=1, padx=20, pady=15)
+subFrameAALF.grid(row = 1, column = 0)
 
 # Run Game
 runGameF = tk.Frame(root, highlightbackground="black", highlightthickness=1, padx=20, pady=15)
 runGameF.grid(row = 100, column = 0)
 runGameB = tk.Button(runGameF, text="Run", command=runGame)
 runGameB.grid(row = 0, column = 0)
+
+# Init
+newAssetLabel = newAssetImageLabel(defaultAssetImagePath)
+listOfAssetLabels.append(newAssetLabel)
+addNewAssetToUI()
+
 
 # Main Loop
 root.mainloop()
