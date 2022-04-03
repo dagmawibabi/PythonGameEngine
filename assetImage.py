@@ -1,5 +1,4 @@
 import pygame
-import random
 
 # Init
 pygame.init()
@@ -21,6 +20,9 @@ class AssetImage():
     def loadImage(self, filePath):
         self.imagePath = filePath
         self.imageSurface = pygame.image.load(self.imagePath)
+    def setImagePostion(self, x, y):
+        self.x = x
+        self.y = y
     def flipImage(self, flipX, flipY):
         self.flipImageX = flipX
         self.flipImageY = flipY
@@ -34,12 +36,10 @@ class AssetImage():
         if self.rotateImageAngle >= 360:
             self.rotateImageAngle = 0.0
         self.imageSurface = pygame.transform.rotate(self.imageSurface, self.rotateImageAngle)
-    def displayImage(self, screen, x, y):
-        self.x = x
-        self.y = y
+    def displayImage(self, screen):
         self.screen = screen
-        self.screen.fill((0, 0, 0))
-        self.screen.blit(self.imageSurface, (x, y))
+        #self.screen.fill((0, 0, 0))
+        self.screen.blit(self.imageSurface, (self.x, self.y))
 
 # Implementation
 player = AssetImage()
@@ -47,20 +47,20 @@ player.loadImage("assets/images/1.png")
 player.flipImage(True, False)
 player.scaleImage(150, 200)
 player.rotateImage(155.0)
-xx = 50
-angle = 0.0
-# Game Loop
-isRunning = True
-while isRunning:
-    player.displayImage(screen, 100, 100)
-    for event in pygame.event.get():
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_w:
-                angle += 10.0
 
-        if event.type == pygame.KEYUP:
-            angle += 0
-        if event.type == pygame.QUIT:
-            isRunning = False
-    pygame.display.update()
-pygame.quit()
+# Game Loop
+#isRunning = True
+#while isRunning:
+#    player.displayImage(screen, 100, 100)
+#    for event in pygame.event.get():
+#        if event.type == pygame.KEYDOWN:
+#            if event.key == pygame.K_w:
+#                angle += 10.0
+#
+#        if event.type == pygame.KEYUP:
+#            angle += 0
+#        if event.type == pygame.QUIT:
+#            isRunning = False
+#    pygame.display.update()
+#pygame.quit()
+#*/
