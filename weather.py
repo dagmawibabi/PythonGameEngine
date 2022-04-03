@@ -5,7 +5,7 @@ import random
 pygame.init()
 screen = pygame.display.set_mode((1200, 800))
 
-#! W E A T H E R 
+#? W E A T H E R 
 # Each Rain Drop Particle Class
 class rainDrop():
     def __init__(self, startYLevel, screenWidth, width, height):
@@ -114,6 +114,8 @@ class Weather():
             self.clearSnowLevel = False
         self.snow(self.snowAmount, self.snowFlakeSpeed, self.snowColor, self.snowStartLevel, self.snowFlakeWidth, self.snowFlakeHeight, self.snowFlakeRadius)
 
+
+
 # Implementation
 weather = Weather(screen, 1200, 800)
 weather.rain(1, 2, (255, 0, 255), 0, 1, 10)
@@ -121,11 +123,8 @@ weather.snow(1, 5, (255, 255, 255), 0, 2, 2, 8)
 
 # Game Loop
 isRunning = True
-font = pygame.font.Font("assets/fonts/Abel-Regular.ttf", 20)
 while isRunning:
     weather.snowFall()
-    score = font.render(str( len(weather.rainDrops) ) , True, (255, 255, 255))
-    screen.blit(score, (10, 10))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             isRunning = False
