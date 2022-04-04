@@ -2,13 +2,13 @@ from multiprocessing import Event
 from turtle import back, bgcolor
 import pygame
 import tkinter as tk
-from assetImage import *
+from sprites import *
 
 # Root Window
 root = tk.Tk()
 root.geometry("900x600")
 root.title("Eunoia Engine")
-root.config(background="black")
+#root.config(background="black")
 #root.wm_attributes("-transparentcolor", "white")
 
 # Defaults
@@ -93,7 +93,7 @@ def addNewAssetImage():
     except:
         assetYPos = defaultAssetImageYPos
     # Set Asset Properties 
-    asset = AssetImage()
+    asset = Sprite()
     try:
         asset.loadImage(assetPath)
     except:
