@@ -9,7 +9,7 @@
     4. Font - A class to load and manipulate texts and fonts
     5. Animated Sprites - A class to animate assets 
     6. Game Object - A giant class that extends all the above classes
-        - Contains properties of game objects 
+		- Contains properties of game objects 
 		- Allows to create object w or wout images/sounds/music 
 		- Keeps track of the game object it self (xy Pos, xyRot, xyTrans/xyScale)
 
