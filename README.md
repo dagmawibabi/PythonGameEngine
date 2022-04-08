@@ -23,10 +23,8 @@
 	6. Environment - A class to load and manipulate surrounding environment
 	7. Rigid Body - A class to simulate and manipulate physics of game objects 
 	8. Physics Engine - A class to apply physics onto game objects
-<br>
 
 ---
-<br>
 
 ## Tasks <br>
 
@@ -46,8 +44,6 @@
 	[] Light
 	[] Environment
 	[] Collision Detector
-
-<br>
 
 ---
 
