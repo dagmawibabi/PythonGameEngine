@@ -1,6 +1,5 @@
 import pygame
 
-# A class to load and display images
 class Sprite():
     def __init__(self):
         self.spritePath = "defaults/images/1.png"
@@ -61,19 +60,8 @@ screen = pygame.display.set_mode((1200, 800))
 
 # Implementation
 sampleSprite = Sprite()
+
 # Implementation - Separated
-#sampleSprite.loadSprite("defaults/images/1.png")
-#sampleSprite.positionSprite(100, 200)
-#sampleSprite.scaleSprite(400, 400)
-#sampleSprite.flipSprite(False, True)
-#sampleSprite.rotateSprite(45.0)
-#sampleSprite.setOpacity(150)
-#sampleSprite.displaySprite(screen)
-
-#sampleSprite.displaySprite(screen)
-
-# Implementation - One Liner
-#screen.fill((100,100,100))
 sampleSprite.showSprite(screen, "defaults/images/1.png", 100, 100, 150, 150, False, False, 0.0, 1000)
 
 # Game Loop
