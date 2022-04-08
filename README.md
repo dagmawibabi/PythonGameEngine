@@ -1,7 +1,7 @@
 # Python Game Engine
-## A game engine built with python
+## *A game engine built with python*
 
-> Classes
+## **Classes**
 > 
     1. Sprites - A class to load and manipulate asset images
     2. Sound - A class to load and manipulate SFX
@@ -13,7 +13,7 @@
 		- Allows to create object w or wout images/sounds/music 
 		- Keeps track of the game object it self (xy Pos, xyRot, xyTrans/xyScale)
 
-> Advanced Classes
+## **Advanced Classes**
 > 
 	1. Collision Detector - A class to manipulate and detect collisions
 	2. Particle System - A class to manipulate particles 
