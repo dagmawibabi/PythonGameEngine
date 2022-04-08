@@ -28,7 +28,7 @@
 
 ## Tasks <br>
 
-> [Dagmawi](https://github.com/dagmawibabi)
+[Dagmawi](https://github.com/dagmawibabi)
 
 	[x] Font
 	 [] Camera
@@ -36,7 +36,7 @@
 	 [] Animated Sprites
 	 [] Particle System
 
-> [Yohannes](https://github.com/yohannes-jo)
+[Yohannes](https://github.com/yohannes-jo)
 > 
 	[] UI
 	[] Music 
