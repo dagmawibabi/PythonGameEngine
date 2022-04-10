@@ -1,8 +1,8 @@
 import pygame
 
 # Init
-pygame.init()
-screen = pygame.display.set_mode((1200, 800))
+#pygame.init()
+#screen = pygame.display.set_mode((1200, 800))
 
 class Text():
     def __init__(self):
@@ -70,21 +70,21 @@ class Text():
 
 
 # Implementation
-sampleText = Text()
-sampleText.setUnderline(True)
-sampleText.setText("Hello World!")
-sampleText.setFontSize(30)
-sampleText.textPosition(20, 10)
-sampleText.displayText(screen)
+#sampleText = Text()
+#sampleText.setUnderline(True)
+#sampleText.setText("Hello World!")
+#sampleText.setFontSize(30)
+#sampleText.textPosition(20, 10)
+#sampleText.displayText(screen)
+#sampleText.write(screen, "Eunoia Engine", "defaults/fonts/VT323-Regular.ttf", 100, (255, 0, 255), (50, 100, 50), 10, 50)
 
-sampleText.write(screen, "Eunoia Engine", "defaults/fonts/VT323-Regular.ttf", 100, (255, 0, 255), (50, 100, 50), 10, 50)
 # Game Loop
-isRun = True
-while isRun:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            isRun = False
-    pygame.display.update()
-
-pygame.quit()
+#isRun = True
+#while isRun:
+#    for event in pygame.event.get():
+#        if event.type == pygame.QUIT:
+#            isRun = False
+#    pygame.display.update()
+#
+#pygame.quit()
 
